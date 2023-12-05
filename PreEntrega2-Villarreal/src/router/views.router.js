@@ -19,16 +19,21 @@ router.get('/', async (req, res) => {
         }
 
         if (query) {
-            search.category = { "$regex": query, "$options": "i" };
-            if (!isNaN(stock)) {
-                if (stock > 0) {
-                    search.stock = { $gt: 0 }; 
-                } else {
-                    return res.status(400).send({ error: 'Invalid stock value' });
-                }
+            search["$or"] = [
+                { title: { "$regex": query, "$options": "i" } },
+                { category: { "$regex": query, "$options": "i" } }
+            ];
+        }
+
+        if (!isNaN(stock)) {
+            if (stock > 0) {
+                search.stock = { $gt: 0 }; 
+            } else {
+                return res.status(400).send({ error: 'Invalid stock value' });
             }
         }
 
+        
         const totalCount = await productModel.countDocuments(search);
         const totalPages = Math.ceil(totalCount / limit);
 
@@ -116,3 +121,5 @@ router.get('/carts/:cid', async (req, res) => {
 });
 
 export default router;
+
+
