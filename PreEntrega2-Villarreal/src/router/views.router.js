@@ -18,9 +18,17 @@ router.get('/', async (req, res) => {
             return res.status(400).send({ error: 'Invalid page number' });
         }
 
-        if (query) search.category = { "$regex": query, "$options": "i" };
-        if (!isNaN(stock)) search.stock = { $gt: 0 };
-        
+        if (query) {
+            search.category = { "$regex": query, "$options": "i" };
+            if (!isNaN(stock)) {
+                if (stock > 0) {
+                    search.stock = { $gt: 0 }; 
+                } else {
+                    return res.status(400).send({ error: 'Invalid stock value' });
+                }
+            }
+        }
+
         const totalCount = await productModel.countDocuments(search);
         const totalPages = Math.ceil(totalCount / limit);
 
