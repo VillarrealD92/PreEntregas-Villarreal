@@ -3,7 +3,6 @@ import { productService } from "../services/index.repositories.js"
 
 export const getProducts = async (req, res)=> {
     try {
-        /* const products = await juan.getProducts() */
         const limit = parseInt(req.query.limit) || 3
         const page = parseInt(req.query.page) || 1
         const query = req.query.query || ""
@@ -36,7 +35,6 @@ export const getProducts = async (req, res)=> {
 export const getProductById = async (req, res) => {
     try {
         const id=req.params.pid
-        //const productRequired = await juan.getProductsById(parseInt(id))
         const productRequired = await productService.getProductById(id)
         productRequired? res.json( { productRequired } ) : res.json("Not Found")
         
@@ -50,11 +48,7 @@ export const createProduct = async (req,res) => {
     try {
         const product = req.body
         const { title, category, description, price, thumbnail, code, stock } = product
-
-        //const productAdded = await juan.addProduct(title, category, description, price, thumbnail, code, stock)
         const productAdded = await productService.createProduct(title, category, description, price, thumbnail, code, stock)
-        
-        /* ProductsModel.create({title, category, description, price, thumbnail, code, stock}) */
 
         res.json(productAdded)
 
@@ -69,13 +63,10 @@ export const updateProduct = async (req,res) =>{
         const id = req.params.pid
         const updateRequest = req.body
 
-        const productUpdated = await productService.updateProduct(id, updateRequest)/* ProductsModel.updateOne({ _id: id },{ $set: updateRequest }); */
+        const productUpdated = await productService.updateProduct(id, updateRequest)
         
         res.status(200).send({productUpdated})
 
-        /*
-        const updateMessage = await juan.updateProduct(parseInt(req.params.pid),keyToUpdate,newValue) 
-        */
     } catch (error) {
         console.log(error);
         res.status(500).send(error)
@@ -85,10 +76,8 @@ export const updateProduct = async (req,res) =>{
 export const deleteProduct = async (req,res) => {
     try {
         const id=req.params.pid
-        //const deletionMessage = await juan.deleteProduct(id)
         await productService.deleteProduct(id)
-        /* await ProductsModel.deleteOne({ _id: id }) */;
-        res.status(200).send("Product ID "+id+" has been deleted")
+        res.status(200).send("Product ID " + id + " has been deleted")
     } catch (error) {
         console.log(error);
         res.status(500).send(error)

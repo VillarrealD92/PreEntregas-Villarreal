@@ -31,7 +31,7 @@ mongoose.connect(MONGO_URL, {dbName: MONGO_DBNAME})
         console.log("Mongo DB connected")
     })
     .catch(e => {
-        console.log("couldn't connect to DB "+e);
+        console.log("couldn't connect to DB " + e);
         res.status(500).send(e)
     })   
 
@@ -54,7 +54,7 @@ app.set("view engine", "handlebars")
 
 const port = config.port || PORT
 
-const httpServer = app.listen( port, () => console.log("Listening in "+port ))
+const httpServer = app.listen( port, () => console.log("Listening in " + port ))
 const socketServer = new Server(httpServer) 
 socketServer.on("connection", async socket => {
     console.log("Client connected")

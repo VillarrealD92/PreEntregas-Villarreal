@@ -84,7 +84,7 @@ export const addProductToCart = async (req, res) => {
     res.status(200).send(cart);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Something went wrong while adding products to cart. Error message: "+error);
+    res.status(500).send("Something went wrong while adding products to cart" + error);
   }
 };
 
@@ -105,10 +105,10 @@ export const deleteProductFromCart = async (req, res) => {
 
     const deletingDocument = await cartService.updateCart(cartId, newProducts);
 
-    res.status(200).send("Deletion process has been succesfully done: "+deletingDocument);
+    res.status(200).send("Delete succesful "+deletingDocument);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Something went wrong while deleting document. Error message: "+error);
+    res.status(500).send("Something went wrong" + error);
   }
 };
 
@@ -121,10 +121,10 @@ export const emptyCart = async (req, res) => {
     const emptyingCart = await cartService.updateCart(cartId, emptyCart);
 
     console.log(emptyingCart);
-    res.status(200).send("Empty request was succesful: "+emptyingCart);
+    res.status(200).send("Empty request was succesful: " + emptyingCart);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Couldnt empty your cart. Error message: "+error);
+    res.status(500).send("Couldn't empty your cart." + error);
   }
 };
 
@@ -135,7 +135,7 @@ export const createCart = async (req, res) => {
     res.status(201).send("New cart has been created");
   } catch (error) {
     console.log(error);
-    res.status(500).send("Something went wrong while creating new cart. Error message: "+error);
+    res.status(500).send("Something went wrong" + error);
   }
 };
 
@@ -158,10 +158,10 @@ export const changeProductQuantityInCart = async (req, res) => {
 
     const updatingCart = await cartService.updateCart(cartId, newQuantity);
     console.log(updatingCart);
-    res.status(200).send("Product quantity has been updated in cart: "+updatingCart);
+    res.status(200).send("Product quantity has been updated" + updatingCart);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Couldnt change product quantity. Error message: "+error);
+    res.status(500).send("Couldnt change product quantity" + error);
   }
 };
 
@@ -173,9 +173,9 @@ export const insertProductsToCart = async (req, res) => {
     const updatedCart = await cartService.updateCart(cartId, newProducts);
 
     console.log(updatedCart);
-    res.status(200).send("Products have been added to cart: "+updatedCart);
+    res.status(200).send("Products have been added to cart: " + updatedCart);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Couldnt insert products to cart"+error);
+    res.status(500).send("Couldn't add products to cart" + error);
   }
 };

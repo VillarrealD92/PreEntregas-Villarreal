@@ -108,9 +108,6 @@ export const checkOutView = async (req, res) => {
     }
 }
 
-
-
-/* MOVER EL CHECKCARTSESSION DE LUGAR */
 export const checkCartSession = async (req, res) => {
 
     const cartSessionActive = req.session.user
@@ -119,5 +116,5 @@ export const checkCartSession = async (req, res) => {
     if(cartSessionActive != undefined){
         const cartId = req.session.user.cart
         return res.redirect(`/cart/${cartId}`)
-    } else { return res.send("No cart has been created yet, login first!") }
+    } else { return res.send("No cart has been created yet, please login!") }
 }

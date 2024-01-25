@@ -19,7 +19,7 @@ export const checkAdminPermissions = (req, res, next) => {
 
 export const checkUserPermissions = (req, res, next) => {
     const sessionActive = req.session.user
-    if (sessionActive == undefined) return res.send("Please Logine")
+    if (sessionActive == undefined) return res.send("Please Login")
     if(req.session.user.role !== "user") return res.status(403).send("Not allowed")
     next()
 }

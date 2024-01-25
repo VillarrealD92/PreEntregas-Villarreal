@@ -34,12 +34,12 @@ const initializePassport = () => {
         try {
             const user = await userService.getUserByEmail(username)
             if (!user) {
-                console.log("No users registered with that email address");
+                console.log("No user with that email address was found");
                 return done(null, false)
             }
 
             if(!validatePassword(password, user)){
-                console.log("Invalid Credentials");
+                console.log("Invalid Password");
                 return done(null, false)
             }
 
@@ -61,7 +61,7 @@ const initializePassport = () => {
             const user = await userService.getUserByEmail(profile._json.email)  
             console.log(user);
             if(user){
-                console.log("User is logged in")
+                console.log("Logged in")
                 return done(null, user);
             }
 
@@ -76,7 +76,7 @@ const initializePassport = () => {
 
             return done(null, result)
         } catch (error) {
-            return done("Couldnt login with github: "+error)
+            return done("Couldn't login with github: "+error)
         }
     }))
 

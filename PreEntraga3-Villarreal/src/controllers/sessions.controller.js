@@ -8,7 +8,7 @@ export const login = async(req, res) => {
         req.session.user = req.user
         return res.status(200).redirect("/products")
     } catch (error) {
-        return res.status(500).send("Couldnt login. Error message: "+error)
+        return res.status(500).send("Couldn't login. Error message: " + error)
     }
 }
 
@@ -19,7 +19,7 @@ export const githubCallback = (req,res) => {
         req.session.user = req.user
         res.status(200).redirect("/products")
     } catch (error) {
-        res.status(500).send("GitHubCallback has failed. Error message: "+error)   
+        res.status(500).send("GitHubCallback has failed." + error)   
     }
 }
 
@@ -27,7 +27,7 @@ export const register = async(req, res) => {
     try {
         return res.status(201).redirect("/")
     } catch (error) {
-        return res.status(500).send("Couldnt process your registe request. Error: "+error)
+        return res.status(500).send("Couldn't process your registe request" + error)
     }  
 }
 
@@ -38,7 +38,7 @@ export const logout = (req, res) => {
             return res.redirect("/")
         })         
     } catch (error) {
-        return res.status(500).send("Logout failure")
+        return res.status(500).send("Failed to logout")
     }
 }
 
@@ -48,6 +48,6 @@ export const current = (req, res) =>{
         const userDTO = new UserDTO(user)
 		return res.send(userDTO);
 	} catch (error) {
-		res.status(500).send("Couldnt get current user informatio. Error Message: "+error);
+		res.status(500).send("Couldnt get current user informatio. Error Message: " + error);
 	}
 }

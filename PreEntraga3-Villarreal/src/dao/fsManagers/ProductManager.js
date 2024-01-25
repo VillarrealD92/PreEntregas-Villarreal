@@ -9,7 +9,7 @@ class ProductManager {
     validate = async(product) => {
         const { title, category, description, price, code, stock } = product
         if (!title || !category || !description || !price || !code || !stock) {
-           return "ERROR 1: All fields, except thumbnail, are required"
+           return "All fields, except thumbnail, are required"
         }
     
         try {
@@ -17,7 +17,7 @@ class ProductManager {
                 const db = JSON.parse(await fs.promises.readFile(this.path, "utf-8"))
                 const checkCode = db.find(p => p.code === product.code)
                 if (checkCode) {
-                    return "ERROR 2: Product Code is already in use";
+                    return "Product Code is already in use";
                 }
             }
         } catch (error) {
@@ -36,7 +36,7 @@ class ProductManager {
             } else { return console.log("Not Found") }
 
         } catch (error) {
-            return console.log("Error processing DB at getProductsById execution: "+error);
+            return console.log("Error processing DB" + error);
         }
     }
 
@@ -51,7 +51,7 @@ class ProductManager {
                 return console.log(JSON.parse(await fs.promises.readFile(this.path, "utf-8"))) }
 
         } catch (error) {
-            console.log("Error: "+ error)
+            console.log("Error: " + error)
   
         }
     }
@@ -64,7 +64,7 @@ class ProductManager {
                 return id
             } else {return 1}
         } catch (error) {
-            console.log("Id Creating Error: "+error);
+            console.log("Error creating Id" + error);
             return 
         }
     }
@@ -92,15 +92,15 @@ class ProductManager {
                 this.products.push(product)
                 const db = JSON.stringify(this.products)
                 await fs.promises.writeFile(this.path, db)
-                return "DB file has been successfully created and product Id 1 has been added"           
+                return "DB file has been successfully created and product Id has been added"           
             }else{
                 const db = JSON.parse(await fs.promises.readFile(this.path,"utf-8"))
                 const newDB= [...db, product]             
                 await fs.promises.writeFile(this.path, JSON.stringify(newDB))
-                return "Product added to DB"
+                return "Product added"
             }
         } catch (error) {
-            console.log("Error: "+error);
+            console.log("Error: " + error);
         }
     }
 
@@ -113,11 +113,11 @@ class ProductManager {
             
             if (productById) {
                 await fs.promises.writeFile(this.path, newDBString)
-                return "Product Id number "+id+ " has been deleted"
+                return "Product Id number " + id + " has been deleted"
             } else{ return "Wrong ID number" }
     
         } catch (error) {
-            console.log("Deleting Error: "+error);
+            console.log("Deleting Error: " + error);
         }   
     }
     
@@ -142,7 +142,7 @@ class ProductManager {
             }else{return "Wrong Id" }
 
         } catch (error) {
-            console.log("Updating Error: "+error)
+            console.log("Updating Error: " + error)
         }        
     }    
 }
